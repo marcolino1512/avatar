@@ -9,8 +9,8 @@
 </head>
 <body class="loading">
 
-    <!-- ⏳ Tela de carregamento temática -->
-    <div id="loader">
+    <!-- ⏳ Tela de carregamento temática (inline style garante o overlay mesmo antes do CSS carregar) -->
+    <div id="loader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#06080f;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transition:opacity 0.5s ease;">
         <!-- Três anéis concêntricos girando (espelho dos círculos do site) -->
         <div class="lc-rings">
             <div class="lc-ring lc-ring-1"></div>
