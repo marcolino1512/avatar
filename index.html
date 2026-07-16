@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="style.css">
     <title>Avatar - Os Quatro Elementos</title>
 </head>
-<body>
+<body class="loading">
+
+    <!-- ⏳ Tela de carregamento temática -->
+    <div id="loader">
+        <!-- Três anéis concêntricos girando (espelho dos círculos do site) -->
+        <div class="lc-rings">
+            <div class="lc-ring lc-ring-1"></div>
+            <div class="lc-ring lc-ring-2"></div>
+            <div class="lc-ring lc-ring-3"></div>
+            <div class="lc-core"></div>
+        </div>
+
+        <!-- Texto do loader -->
+        <div class="lc-texts">
+            <p class="lc-title">AVATAR</p>
+            <p class="lc-subtitle">Os Quatro Elementos</p>
+            <p class="lc-element" id="lcElement">💧 Água</p>
+        </div>
+
+        <!-- Barra de progresso de 2 segundos -->
+        <div class="lc-bar"><div class="lc-bar-fill"></div></div>
+    </div>
+
     <!-- 🌿 Cabeçalho fixo com navegação -->
     <header class="header">
         <a href="#" class="logo">Esperança</a>

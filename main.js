@@ -2,6 +2,40 @@
 // 🌀 AVATAR - Os Quatro Elementos
 // ─────────────────────────────────────────
 
+// ⏳ LOADER — cicla os 4 elementos e some após 2 segundos
+(function () {
+    const loader   = document.getElementById('loader');
+    const lcEl     = document.getElementById('lcElement');
+
+    const elements = [
+        { label: '💧 Água',  color: '#38bdf8' },
+        { label: '🌬️ Ar',   color: 'rgb(43,255,0)' },
+        { label: '🔥 Fogo',  color: '#f97316' },
+        { label: '🪨 Terra', color: '#a3820a' },
+    ];
+
+    let idx = 0;
+
+    // Troca o elemento exibido a cada 500ms com fade
+    const cycle = setInterval(() => {
+        idx = (idx + 1) % elements.length;
+        lcEl.style.opacity = '0';
+        setTimeout(() => {
+            lcEl.textContent  = elements[idx].label;
+            lcEl.style.color  = elements[idx].color;
+            lcEl.style.opacity = '1';
+        }, 200);
+    }, 500);
+
+    // Remove o loader após 2 segundos
+    setTimeout(() => {
+        clearInterval(cycle);
+        loader.classList.add('fade-out');
+        document.body.classList.remove('loading');
+        setTimeout(() => loader.remove(), 500);
+    }, 2000);
+}());
+
 // 🎯 Elementos do DOM
 const rotateBtn   = document.getElementById('rotateBtn');
 const slides      = document.querySelectorAll('.bg-slide');
