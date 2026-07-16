@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>Avatar - Os Quatro Elementos</title>
+</head>
+<body>
+    <!-- 🌿 Cabeçalho fixo com navegação -->
+    <header class="header">
+        <a href="#" class="logo">Esperança</a>
+
+        <!-- ☰ Botão hambúrguer (visível apenas em mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navbar" id="navbar">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <!-- 🌀 Container principal dos slides -->
+    <div class="container">
+
+        <!-- 🌐 Slide 1 - Korra / Equilíbrio -->
+        <div class="bg-slide active">
+            <div class="circle bg">
+                <img src="img/Korra.png" alt="Korra">
+            </div>
+            <div class="circle large">
+                <img src="img/Korra.png" alt="Korra">
+            </div>
+            <div class="circle small">
+                <img src="img/Korra.png" alt="Korra">
+            </div>
+            <div class="content-text">
+                <div class="place"><h1>Equilíbrio</h1></div>
+                <div class="country"><h2>Avatar</h2></div>
+            </div>
+        </div>
+
+        <!-- 💧 Slide 2 - Água -->
+        <div class="bg-slide">
+            <div class="circle bg">
+                <img src="img/agua.jpg" alt="Água">
+            </div>
+            <div class="circle large">
+                <img src="img/agua.jpg" alt="Água">
+            </div>
+            <div class="circle small">
+                <img src="img/agua.jpg" alt="Água">
+            </div>
+            <div class="content-text">
+                <div class="place"><h1>Água</h1></div>
+                <div class="country"><h2>Adaptação</h2></div>
+            </div>
+        </div>
+
+        <!-- 🌬️ Slide 3 - Ar -->
+        <div class="bg-slide">
+            <div class="circle bg">
+                <img src="img/Ar.jpg" alt="Ar">
+            </div>
+            <div class="circle large">
+                <img src="img/Ar.jpg" alt="Ar">
+            </div>
+            <div class="circle small">
+                <img src="img/Ar.jpg" alt="Ar">
+            </div>
+            <div class="content-text">
+                <div class="place"><h1>Ar</h1></div>
+                <div class="country"><h2>Livre</h2></div>
+            </div>
+        </div>
+
+        <!-- 🔥 Slide 4 - Fogo -->
+        <div class="bg-slide">
+            <div class="circle bg">
+                <img src="img/fogo.jpg" alt="Fogo">
+            </div>
+            <div class="circle large">
+                <img src="img/fogo.jpg" alt="Fogo">
+            </div>
+            <div class="circle small">
+                <img src="img/fogo.jpg" alt="Fogo">
+            </div>
+            <div class="content-text">
+                <div class="place"><h1>Fogo</h1></div>
+                <div class="country"><h2>Incandescente</h2></div>
+            </div>
+        </div>
+
+        <!-- 🪨 Slide 5 - Terra -->
+        <div class="bg-slide">
+            <div class="circle bg">
+                <img src="img/Terra.jpg" alt="Terra">
+            </div>
+            <div class="circle large">
+                <img src="img/Terra.jpg" alt="Terra">
+            </div>
+            <div class="circle small">
+                <img src="img/Terra.jpg" alt="Terra">
+            </div>
+            <div class="content-text">
+                <div class="place"><h1>Terra</h1></div>
+                <div class="country"><h2>Sólido</h2></div>
+            </div>
+        </div>
+
+        <!-- 🔲 Sobreposição escura central -->
+        <div class="circle-darktransp"></div>
+
+        <!-- ➖ Linha divisória -->
+        <span class="line"></span>
+
+        <!-- 🔄 Botão girar slide -->
+        <span class="rotate-btn" id="rotateBtn" role="button" aria-label="Próximo elemento">
+            <i class='bx bx-rotate-right'></i>
+        </span>
+    </div>
+
+    <!-- 🎵 Botão de música -->
+    <div class="som" id="som" role="button" aria-label="Tocar/Pausar música">
+        <i class='bx bx-music'></i>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

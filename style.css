@@ -1,0 +1,439 @@
+/* 🌍 Reset global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────
+   🧭 HEADER & NAVEGAÇÃO
+───────────────────────────────────────── */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 80px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 30px;
+    color: rgb(43, 255, 0);
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar a {
+    font-size: 18px;
+    color: rgb(43, 255, 0);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 50px;
+    transition: opacity 0.2s;
+}
+
+.navbar a:hover {
+    opacity: 0.7;
+}
+
+/* ☰ Hambúrguer - oculto por padrão no desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    padding: 4px;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: rgb(43, 255, 0);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    display: block;
+}
+
+/* Animação X ao abrir menu */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 8px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -8px);
+}
+
+/* ─────────────────────────────────────────
+   🖼️ CONTAINER E SLIDES
+───────────────────────────────────────── */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg-slide,
+.bg-slide .circle,
+.bg-slide .circle img,
+.circle-darktransp {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-slide .circle {
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+    /* 🚀 Força camada GPU para o container dos círculos */
+    transform: translateZ(0);
+}
+
+.bg-slide.active .circle {
+    z-index: 10;
+}
+
+.bg-slide .circle.large,
+.circle-darktransp {
+    clip-path: circle(50% at 50% 50%);
+}
+
+.bg-slide .circle.small {
+    clip-path: circle(30% at 50% 50%);
+    z-index: 12;
+}
+
+/* 🎨 Imagens dos slides com aceleração GPU */
+.bg-slide .circle img {
+    object-fit: cover;
+    transform: rotate(0deg) scale(4);
+    opacity: 0;
+    transition:
+        transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1),
+        opacity   1s   cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* 🚀 GPU: pré-aloca compositing layer, elimina o jank */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* ✅ Slide ativo - entra girando */
+.bg-slide.active .circle img {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+}
+
+/* ⏩ Slide saindo - gira para fora */
+.bg-slide.after-active .circle img {
+    transform: rotate(720deg) scale(4);
+    opacity: 0;
+}
+
+/* ⏱️ Delays escalonados por camada */
+.bg-slide.active .circle.bg img,
+.bg-slide.after-active .circle.bg img {
+    transition-delay: .6s;
+}
+
+.bg-slide.active .circle.large img,
+.bg-slide.after-active .circle.large img {
+    transition-delay: .9s;
+}
+
+.bg-slide.active .circle.small img,
+.bg-slide.after-active .circle.small img {
+    transition-delay: .9s;
+}
+
+/* 🔲 Overlay escuro central */
+.circle-darktransp {
+    background: rgba(0, 0, 0, .1);
+    z-index: 11;
+}
+
+/* ─────────────────────────────────────────
+   📝 TEXTOS DE CONTEÚDO
+───────────────────────────────────────── */
+.bg-slide .content-text {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.bg-slide.active .content-text {
+    z-index: 101;
+}
+
+.content-text .country {
+    margin-top: 60px;
+}
+
+.content-text .place,
+.content-text .country {
+    overflow: hidden;
+}
+
+.content-text .place h1,
+.content-text .country h2 {
+    color: rgb(43, 255, 0);
+    text-transform: uppercase;
+    line-height: 1;
+    opacity: 0;
+    transition: transform .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-delay: 1s;
+    will-change: transform;
+}
+
+.content-text .place h1 {
+    font-size: 60px;
+    letter-spacing: 80px;
+    margin-right: -80px;
+    transform: translateY(100%);
+}
+
+.content-text .country h2 {
+    font-size: 50px;
+    letter-spacing: 30px;
+    margin-right: -30px;
+    transform: translateY(-100%);
+}
+
+/* Slide ativo - textos aparecem */
+.bg-slide.active .content-text .place h1,
+.bg-slide.active .content-text .country h2 {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+/* Slide saindo - textos somem */
+.bg-slide.after-active .content-text .place h1 {
+    transform: translateY(-100%);
+    opacity: 1;
+}
+
+.bg-slide.after-active .content-text .country h2 {
+    transform: translateY(100%);
+    opacity: 1;
+}
+
+/* ─────────────────────────────────────────
+   ➖ LINHA DIVISÓRIA
+───────────────────────────────────────── */
+.line {
+    position: absolute;
+    top: 50.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(200px, 60vw, 500px);
+    height: 2px;
+    background: #fff;
+    z-index: 100;
+}
+
+/* ─────────────────────────────────────────
+   🔄 BOTÃO GIRAR
+───────────────────────────────────────── */
+.rotate-btn {
+    right: 60px;
+    bottom: 20px;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #aba72c;
+    border: 2px solid #fff;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform;
+}
+
+.rotate-btn.active {
+    transform: rotate(360deg);
+    pointer-events: none;
+    transition-delay: .2s;
+}
+
+.rotate-btn i {
+    font-size: 40px;
+    color: #fff;
+}
+
+/* ─────────────────────────────────────────
+   🎵 BOTÃO DE MÚSICA
+───────────────────────────────────────── */
+.som {
+    right: 130px;
+    bottom: 20px;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #aba72c;
+    border: 2px solid #fff;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #0891cb;
+    transition: transform 0.2s;
+}
+
+.som:hover {
+    transform: scale(1.1);
+}
+
+/* ─────────────────────────────────────────
+   📱 RESPONSIVIDADE - Tablet (≤ 1024px)
+───────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .header {
+        padding: 20px 40px;
+    }
+
+    .navbar a {
+        margin-left: 30px;
+        font-size: 16px;
+    }
+
+    .content-text .place h1 {
+        font-size: 45px;
+        letter-spacing: 50px;
+        margin-right: -50px;
+    }
+
+    .content-text .country h2 {
+        font-size: 36px;
+        letter-spacing: 20px;
+        margin-right: -20px;
+    }
+}
+
+/* ─────────────────────────────────────────
+   📱 RESPONSIVIDADE - Mobile (≤ 768px)
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    /* 🍔 Hambúrguer aparece no mobile */
+    .hamburger {
+        display: flex;
+        z-index: 1001;
+    }
+
+    /* 📋 Menu dropdown mobile */
+    .navbar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        z-index: 999;
+    }
+
+    .navbar.open {
+        display: flex;
+    }
+
+    .navbar a {
+        margin-left: 0;
+        font-size: 26px;
+        letter-spacing: 4px;
+    }
+
+    /* 📝 Textos menores */
+    .content-text .place h1 {
+        font-size: clamp(20px, 7vw, 36px);
+        letter-spacing: clamp(8px, 4vw, 30px);
+        margin-right: clamp(-30px, -4vw, -8px);
+    }
+
+    .content-text .country h2 {
+        font-size: clamp(16px, 5.5vw, 28px);
+        letter-spacing: clamp(6px, 3vw, 20px);
+        margin-right: clamp(-20px, -3vw, -6px);
+    }
+
+    .content-text .country {
+        margin-top: 30px;
+    }
+
+    /* 🔄 Botão girar menor */
+    .rotate-btn {
+        right: 15px;
+        bottom: 15px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .rotate-btn i {
+        font-size: 28px;
+    }
+
+    /* 🎵 Botão música reposicionado */
+    .som {
+        right: 73px;
+        bottom: 15px;
+        width: 48px;
+        height: 48px;
+        font-size: 28px;
+    }
+}
+
+/* ─────────────────────────────────────────
+   📱 RESPONSIVIDADE - Mobile pequeno (≤ 480px)
+───────────────────────────────────────── */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 22px;
+    }
+
+    .content-text .place h1 {
+        font-size: clamp(16px, 6vw, 26px);
+        letter-spacing: clamp(5px, 3vw, 15px);
+        margin-right: clamp(-15px, -3vw, -5px);
+    }
+
+    .content-text .country h2 {
+        font-size: clamp(13px, 5vw, 20px);
+        letter-spacing: clamp(4px, 2.5vw, 12px);
+        margin-right: clamp(-12px, -2.5vw, -4px);
+    }
+}
