@@ -378,21 +378,35 @@
         letter-spacing: 4px;
     }
 
-    /* 📝 Textos menores */
+    /* 📝 Posicionamento explícito para evitar clip do overflow:hidden */
+    .bg-slide .content-text {
+        width: calc(100vw - 20px);
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0;
+    }
+
+    .content-text .place,
+    .content-text .country {
+        width: 100%;
+        text-align: center;
+    }
+
     .content-text .place h1 {
-        font-size: clamp(20px, 7vw, 36px);
-        letter-spacing: clamp(8px, 4vw, 30px);
-        margin-right: clamp(-30px, -4vw, -8px);
+        font-size: 20px;
+        letter-spacing: 6px;
+        margin-right: -6px;
     }
 
     .content-text .country h2 {
-        font-size: clamp(16px, 5.5vw, 28px);
-        letter-spacing: clamp(6px, 3vw, 20px);
-        margin-right: clamp(-20px, -3vw, -6px);
+        font-size: 16px;
+        letter-spacing: 4px;
+        margin-right: -4px;
     }
 
     .content-text .country {
-        margin-top: 30px;
+        margin-top: 25px;
     }
 
     /* 🔄 Botão girar menor */
@@ -423,17 +437,5 @@
 @media (max-width: 480px) {
     .logo {
         font-size: 22px;
-    }
-
-    .content-text .place h1 {
-        font-size: clamp(16px, 6vw, 26px);
-        letter-spacing: clamp(5px, 3vw, 15px);
-        margin-right: clamp(-15px, -3vw, -5px);
-    }
-
-    .content-text .country h2 {
-        font-size: clamp(13px, 5vw, 20px);
-        letter-spacing: clamp(4px, 2.5vw, 12px);
-        margin-right: clamp(-12px, -2.5vw, -4px);
     }
 }
